@@ -1,0 +1,109 @@
+# SPDX-FileCopyrightText: 2020 Serokell <https://serokell.io/>
+#
+# SPDX-License-Identifier: MPL-2.0
+
+name: lightning-network
+version: 0.0.0.0
+synopsis: A Haskell interface for the Lightning Network
+
+copyright: 2020 Serokell
+license-file: LICENSES/MPL-2.0.txt
+
+github: serokell/lightning-network
+
+extra-source-files:
+  - CHANGELOG.md
+  - README.md
+
+
+dependencies:
+  - base >= 4.7 && < 5
+  - bytestring
+  - text
+
+library:
+  source-dirs: src
+
+  dependencies:
+    - aeson
+    - base64-bytestring
+    - containers
+    - time
+    - servant
+    - servant-auth
+    - servant-client-core
+
+executables:
+  lightning-invoice:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - lightning-network
+
+      - http-client
+      - random
+      - servant
+      - servant-client
+      - servant-client-core
+
+tests:
+  client-generic:
+    source-dirs: example/client-generic
+    main: Main.hs
+
+    dependencies:
+      - lightning-network
+
+      - servant
+      - servant-client
+      - servant-client-core
+
+  client-non-generic:
+    source-dirs: example/client-non-generic
+    main: Main.hs
+
+    dependencies:
+      - lightning-network
+
+      - servant
+      - servant-client
+
+
+default-extensions:
+  - AllowAmbiguousTypes
+  - BangPatterns
+  - ConstraintKinds
+  - DataKinds
+  - DefaultSignatures
+  - DeriveDataTypeable
+  - DeriveGeneric
+  - DerivingStrategies
+  - DuplicateRecordFields
+  - EmptyCase
+  - FlexibleContexts
+  - FlexibleInstances
+  - FunctionalDependencies
+  - GeneralizedNewtypeDeriving
+  - LambdaCase
+  - MonadFailDesugaring
+  - MultiParamTypeClasses
+  - MultiWayIf
+  - NamedFieldPuns
+  - OverloadedStrings
+  - OverloadedLabels
+  - PatternSynonyms
+  - RankNTypes
+  - RecordWildCards
+  - ScopedTypeVariables
+  - StandaloneDeriving
+  - TemplateHaskell
+  - TupleSections
+  - TypeFamilies
+  - TypeOperators
+  - UndecidableInstances
+  - ViewPatterns
+  - TypeApplications

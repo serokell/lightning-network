@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2020 Serokell <https://serokell.io/>
+#
+# SPDX-License-Identifier: MPL-2.0
+
+resolver: lts-14.27
+
+packages:
+- .
+
+nix:
+  packages: [ zlib ]

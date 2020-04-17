@@ -1,0 +1,108 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: dac5c9c3b34c21b600355fc556307f75d4902f0cb9dd7215e497f1db914c2b5e
+
+name:           lightning-network
+version:        0.0.0.0
+synopsis:       A Haskell interface for the Lightning Network
+homepage:       https://github.com/serokell/lightning-network#readme
+bug-reports:    https://github.com/serokell/lightning-network/issues
+copyright:      2020 Serokell
+license:        MPL-2.0
+license-file:   LICENSES/MPL-2.0.txt
+build-type:     Simple
+extra-source-files:
+    CHANGELOG.md
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/serokell/lightning-network
+
+library
+  exposed-modules:
+      Authorization.Macaroon
+      Lightning
+      Lightning.Internal.Amount
+      Lightning.Internal.Invoice
+      Lightning.Node.Api
+      Lightning.Node.Api.GetInfo
+      Lightning.Node.Api.Invoice
+      Lightning.Node.Api.Json
+      Lightning.Node.Api.Pay
+  other-modules:
+      Paths_lightning_network
+  hs-source-dirs:
+      src
+  default-extensions: AllowAmbiguousTypes BangPatterns ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveGeneric DerivingStrategies DuplicateRecordFields EmptyCase FlexibleContexts FlexibleInstances FunctionalDependencies GeneralizedNewtypeDeriving LambdaCase MonadFailDesugaring MultiParamTypeClasses MultiWayIf NamedFieldPuns OverloadedStrings OverloadedLabels PatternSynonyms RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeFamilies TypeOperators UndecidableInstances ViewPatterns TypeApplications
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , base64-bytestring
+    , bytestring
+    , containers
+    , servant
+    , servant-auth
+    , servant-client-core
+    , text
+    , time
+  default-language: Haskell2010
+
+executable lightning-invoice
+  main-is: Main.hs
+  other-modules:
+      Paths_lightning_network
+  hs-source-dirs:
+      app
+  default-extensions: AllowAmbiguousTypes BangPatterns ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveGeneric DerivingStrategies DuplicateRecordFields EmptyCase FlexibleContexts FlexibleInstances FunctionalDependencies GeneralizedNewtypeDeriving LambdaCase MonadFailDesugaring MultiParamTypeClasses MultiWayIf NamedFieldPuns OverloadedStrings OverloadedLabels PatternSynonyms RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeFamilies TypeOperators UndecidableInstances ViewPatterns TypeApplications
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , http-client
+    , lightning-network
+    , random
+    , servant
+    , servant-client
+    , servant-client-core
+    , text
+  default-language: Haskell2010
+
+test-suite client-generic
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      Paths_lightning_network
+  hs-source-dirs:
+      example/client-generic
+  default-extensions: AllowAmbiguousTypes BangPatterns ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveGeneric DerivingStrategies DuplicateRecordFields EmptyCase FlexibleContexts FlexibleInstances FunctionalDependencies GeneralizedNewtypeDeriving LambdaCase MonadFailDesugaring MultiParamTypeClasses MultiWayIf NamedFieldPuns OverloadedStrings OverloadedLabels PatternSynonyms RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeFamilies TypeOperators UndecidableInstances ViewPatterns TypeApplications
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , lightning-network
+    , servant
+    , servant-client
+    , servant-client-core
+    , text
+  default-language: Haskell2010
+
+test-suite client-non-generic
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      Paths_lightning_network
+  hs-source-dirs:
+      example/client-non-generic
+  default-extensions: AllowAmbiguousTypes BangPatterns ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveGeneric DerivingStrategies DuplicateRecordFields EmptyCase FlexibleContexts FlexibleInstances FunctionalDependencies GeneralizedNewtypeDeriving LambdaCase MonadFailDesugaring MultiParamTypeClasses MultiWayIf NamedFieldPuns OverloadedStrings OverloadedLabels PatternSynonyms RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeFamilies TypeOperators UndecidableInstances ViewPatterns TypeApplications
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , lightning-network
+    , servant
+    , servant-client
+    , text
+  default-language: Haskell2010
