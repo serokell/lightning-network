@@ -12,4 +12,4 @@ import GHC.Generics (Generic)
 
 
 newtype MilliSatoshi = MilliSatoshi { msat :: Word64 }
-  deriving (Eq, FromJSON, Generic, Num, Show, ToJSON)
+  deriving (Eq, Ord, FromJSON, Generic, Num, Enum, Real, Integral, Show, ToJSON)
