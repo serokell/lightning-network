@@ -3,9 +3,14 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name: lightning-network
-version: 0.0.0.0
+version: 0.0.0.1
 synopsis: A Haskell interface for the Lightning Network
+description: |
+  Tools for working with payments on the Lightning Netowrk and interacting
+  with a Lightning Network node through its REST API.
+category: Bitcoin, Finance, Network
 
+author: Kirill Elagin <kirelagin@serokell.io>
 copyright: 2020 Serokell
 license-file: LICENSES/MPL-2.0.txt
 
@@ -17,21 +22,22 @@ extra-source-files:
 
 
 dependencies:
-  - base >= 4.7 && < 5
-  - bytestring
-  - text
+  - base >= 4.7 && < 4.15
+  - bytestring >= 0.9 && < 0.11
+  - text >= 0.1 && < 1.3
 
 library:
   source-dirs: src
 
+  # Version bindaries below are likely too tight
   dependencies:
-    - aeson
-    - base64-bytestring
-    - containers
-    - time
-    - servant
-    - servant-auth
-    - servant-client-core
+    - aeson >= 1.3 && < 1.5
+    - base64-bytestring >= 0.1 && < 1.1
+    - containers >= 0.5 && < 0.7
+    - time >= 1.8 && < 1.11
+    - servant >= 0.14 && < 0.17
+    - servant-auth >= 0.3 && < 0.4
+    - servant-client-core >= 0.14 && < 0.17
 
 executables:
   lightning-invoice:
@@ -44,10 +50,10 @@ executables:
     dependencies:
       - lightning-network
 
-      - http-client
-      - random
+      - http-client >= 0.5 && < 0.7
+      - random >= 1.0 && < 1.2
       - servant
-      - servant-client
+      - servant-client >= 0.14 && < 0.17
       - servant-client-core
 
 tests:

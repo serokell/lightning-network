@@ -4,13 +4,18 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: dac5c9c3b34c21b600355fc556307f75d4902f0cb9dd7215e497f1db914c2b5e
+-- hash: 53084aa3620651ec75010f4ee6722feb9233d9f319b51c64bb2c5ab5f46dee1d
 
 name:           lightning-network
-version:        0.0.0.0
+version:        0.0.0.1
 synopsis:       A Haskell interface for the Lightning Network
+description:    Tools for working with payments on the Lightning Netowrk and interacting
+                with a Lightning Network node through its REST API.
+category:       Bitcoin, Finance, Network
 homepage:       https://github.com/serokell/lightning-network#readme
 bug-reports:    https://github.com/serokell/lightning-network/issues
+author:         Kirill Elagin <kirelagin@serokell.io>
+maintainer:     Kirill Elagin <kirelagin@serokell.io>
 copyright:      2020 Serokell
 license:        MPL-2.0
 license-file:   LICENSES/MPL-2.0.txt
@@ -40,16 +45,16 @@ library
       src
   default-extensions: AllowAmbiguousTypes BangPatterns ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveGeneric DerivingStrategies DuplicateRecordFields EmptyCase FlexibleContexts FlexibleInstances FunctionalDependencies GeneralizedNewtypeDeriving LambdaCase MonadFailDesugaring MultiParamTypeClasses MultiWayIf NamedFieldPuns OverloadedStrings OverloadedLabels PatternSynonyms RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeFamilies TypeOperators UndecidableInstances ViewPatterns TypeApplications
   build-depends:
-      aeson
-    , base >=4.7 && <5
-    , base64-bytestring
-    , bytestring
-    , containers
-    , servant
-    , servant-auth
-    , servant-client-core
-    , text
-    , time
+      aeson >=1.3 && <1.5
+    , base >=4.7 && <4.15
+    , base64-bytestring >=0.1 && <1.1
+    , bytestring >=0.9 && <0.11
+    , containers >=0.5 && <0.7
+    , servant >=0.14 && <0.17
+    , servant-auth >=0.3 && <0.4
+    , servant-client-core >=0.14 && <0.17
+    , text >=0.1 && <1.3
+    , time >=1.8 && <1.11
   default-language: Haskell2010
 
 executable lightning-invoice
@@ -61,15 +66,15 @@ executable lightning-invoice
   default-extensions: AllowAmbiguousTypes BangPatterns ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveGeneric DerivingStrategies DuplicateRecordFields EmptyCase FlexibleContexts FlexibleInstances FunctionalDependencies GeneralizedNewtypeDeriving LambdaCase MonadFailDesugaring MultiParamTypeClasses MultiWayIf NamedFieldPuns OverloadedStrings OverloadedLabels PatternSynonyms RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeFamilies TypeOperators UndecidableInstances ViewPatterns TypeApplications
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
-    , bytestring
-    , http-client
+      base >=4.7 && <4.15
+    , bytestring >=0.9 && <0.11
+    , http-client >=0.5 && <0.7
     , lightning-network
-    , random
+    , random >=1.0 && <1.2
     , servant
-    , servant-client
+    , servant-client >=0.14 && <0.17
     , servant-client-core
-    , text
+    , text >=0.1 && <1.3
   default-language: Haskell2010
 
 test-suite client-generic
@@ -81,13 +86,13 @@ test-suite client-generic
       example/client-generic
   default-extensions: AllowAmbiguousTypes BangPatterns ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveGeneric DerivingStrategies DuplicateRecordFields EmptyCase FlexibleContexts FlexibleInstances FunctionalDependencies GeneralizedNewtypeDeriving LambdaCase MonadFailDesugaring MultiParamTypeClasses MultiWayIf NamedFieldPuns OverloadedStrings OverloadedLabels PatternSynonyms RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeFamilies TypeOperators UndecidableInstances ViewPatterns TypeApplications
   build-depends:
-      base >=4.7 && <5
-    , bytestring
+      base >=4.7 && <4.15
+    , bytestring >=0.9 && <0.11
     , lightning-network
     , servant
     , servant-client
     , servant-client-core
-    , text
+    , text >=0.1 && <1.3
   default-language: Haskell2010
 
 test-suite client-non-generic
@@ -99,10 +104,10 @@ test-suite client-non-generic
       example/client-non-generic
   default-extensions: AllowAmbiguousTypes BangPatterns ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveGeneric DerivingStrategies DuplicateRecordFields EmptyCase FlexibleContexts FlexibleInstances FunctionalDependencies GeneralizedNewtypeDeriving LambdaCase MonadFailDesugaring MultiParamTypeClasses MultiWayIf NamedFieldPuns OverloadedStrings OverloadedLabels PatternSynonyms RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeFamilies TypeOperators UndecidableInstances ViewPatterns TypeApplications
   build-depends:
-      base >=4.7 && <5
-    , bytestring
+      base >=4.7 && <4.15
+    , bytestring >=0.9 && <0.11
     , lightning-network
     , servant
     , servant-client
-    , text
+    , text >=0.1 && <1.3
   default-language: Haskell2010
