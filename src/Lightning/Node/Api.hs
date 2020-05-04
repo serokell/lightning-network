@@ -18,7 +18,7 @@ import Servant.API.Generic (ToServantApi, (:-))
 import Servant.Auth (Auth)
 
 import Authorization.Macaroon (Macaroon)
-import Lightning.Node.Api.GetInfo as A (NodeInfo (..))
+import Lightning.Node.Api.GetInfo as A (Address (..), NodeInfo (..))
 import Lightning.Node.Api.Invoice as A (InvoiceReq (..), InvoiceRep (..))
 import Lightning.Node.Api.Pay as A (PayReq (..), PayRep (..))
 
