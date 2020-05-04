@@ -36,7 +36,7 @@ instance FromJSON InvoiceReq where
 
 
 -- | Reply with a created invoice.
-data InvoiceRep = InvoiceResp
+data InvoiceRep = InvoiceRep
   { irpPaymentHash :: Text
   , irpExpiresAt :: POSIXTime
   , irpBolt11 :: Bolt11
