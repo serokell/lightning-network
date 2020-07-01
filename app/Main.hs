@@ -21,23 +21,22 @@ import qualified Lightning.Node.Api as L
 
 main :: IO ()
 main = do
-    [macPath] <- getArgs
 
-    macaroon <- Mac.load macPath
+    macaroon <- Mac.load "/Users/stephan/IdeaProjects/Serokell/Lightning/lightning-control/lightning-1.macaroon"
+
 
     let
       _getInfo :: ClientM L.NodeInfo
       _genInvoice :: L.InvoiceReq -> ClientM L.InvoiceRep
       --_pay :: L.PayReq -> ClientM L.PayRep
-      --_listInvoices :: ClientM [L.InvoiceRep]
+      _listInvoices :: L.InvoiceLabel -> ClientM [L.InvoiceRep]
 
       api :: Api (AsClientT ClientM)
       api = genericClient
-
       ApiV1
         { _getInfo
         , _genInvoice
-        --, _listInvoices
+        , _listInvoices
         --, _pay
         } = fromServant @_ @(AsClientT ClientM) (_v1 api macaroon)
 
@@ -49,7 +48,7 @@ main = do
     manager <- newManager defaultManagerSettings
     let env = mkClientEnv manager (BaseUrl Http "localhost" 3001 "")
 
-    runClientM _getInfo env >>= print
-    runClientM (_genInvoice req) env >>= print
-    --runClientM _listInvoices  env >>= print
+    --runClientM _getInfo env >>= print
+    --runClientM (_genInvoice req) env >>= print
+    --runClientM (_listInvoices (L.InvoiceLabel Nothing)) env >>= print
 

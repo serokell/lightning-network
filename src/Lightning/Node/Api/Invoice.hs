@@ -5,6 +5,7 @@
 -- | Route: @/invoice/@
 module Lightning.Node.Api.Invoice
   ( InvoiceReq (..)
+  , InvoiceLabel (..)
   , InvoiceRep (..)
   ) where
 
@@ -27,6 +28,8 @@ data InvoiceReq = InvoiceReq
   }
   deriving (Generic, Show)
 
+data InvoiceLabel = InvoiceLabel {ilLabel :: Maybe Text} deriving (Generic, Show)
+
 instance ToJSON InvoiceReq where
   toJSON = genericToJSON lightningOptions
   toEncoding = genericToEncoding lightningOptions
@@ -34,6 +37,12 @@ instance ToJSON InvoiceReq where
 instance FromJSON InvoiceReq where
   parseJSON = genericParseJSON lightningOptions
 
+instance ToJSON InvoiceLabel where
+  toJSON = genericToJSON lightningOptions
+  toEncoding = genericToEncoding lightningOptions
+
+instance FromJSON InvoiceLabel where
+  parseJSON = genericParseJSON lightningOptions
 
 -- | Reply with a created invoice.
 data InvoiceRep = InvoiceRep
