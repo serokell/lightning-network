@@ -32,6 +32,10 @@ data ApiV1 route = ApiV1
       :> "genInvoice"
       :> ReqBody '[JSON] InvoiceReq
       :> Post '[JSON] InvoiceRep
+  , _listInvoices ::route
+      :- "invoice"
+      :> "listInvoices"
+      :> Get '[JSON] [InvoiceRep]
   , _pay :: route
       :- "pay"
       :> ReqBody '[JSON] PayReq

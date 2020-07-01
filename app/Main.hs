@@ -29,6 +29,7 @@ main = do
       _getInfo :: ClientM L.NodeInfo
       _genInvoice :: L.InvoiceReq -> ClientM L.InvoiceRep
       --_pay :: L.PayReq -> ClientM L.PayRep
+      --_listInvoices :: ClientM [L.InvoiceRep]
 
       api :: Api (AsClientT ClientM)
       api = genericClient
@@ -36,6 +37,7 @@ main = do
       ApiV1
         { _getInfo
         , _genInvoice
+        --, _listInvoices
         --, _pay
         } = fromServant @_ @(AsClientT ClientM) (_v1 api macaroon)
 
@@ -49,3 +51,5 @@ main = do
 
     runClientM _getInfo env >>= print
     runClientM (_genInvoice req) env >>= print
+    --runClientM _listInvoices  env >>= print
+
