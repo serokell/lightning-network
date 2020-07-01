@@ -21,8 +21,9 @@ import qualified Lightning.Node.Api as L
 
 main :: IO ()
 main = do
+    [macPath] <- getArgs
 
-    macaroon <- Mac.load "/Users/stephan/IdeaProjects/Serokell/Lightning/lightning-control/lightning-1.macaroon"
+    macaroon <- Mac.load macPath
 
 
     let
@@ -50,5 +51,5 @@ main = do
 
     --runClientM _getInfo env >>= print
     --runClientM (_genInvoice req) env >>= print
-    --runClientM (_listInvoices (L.InvoiceLabel Nothing)) env >>= print
+    runClientM (_listInvoices (L.InvoiceLabel Nothing)) env >>= print
 
