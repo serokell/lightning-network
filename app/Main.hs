@@ -25,12 +25,11 @@ main = do
 
     macaroon <- Mac.load macPath
 
-
     let
       _getInfo :: ClientM L.NodeInfo
       _genInvoice :: L.InvoiceReq -> ClientM L.InvoiceRep
       --_pay :: L.PayReq -> ClientM L.PayRep
-      _listInvoices :: L.InvoiceLabel -> ClientM [L.InvoiceRep]
+      _listInvoices :: Maybe L.InvoiceLabel -> ClientM [L.InvoiceRep]
 
       api :: Api (AsClientT ClientM)
       api = genericClient
@@ -49,7 +48,7 @@ main = do
     manager <- newManager defaultManagerSettings
     let env = mkClientEnv manager (BaseUrl Http "localhost" 3001 "")
 
-    --runClientM _getInfo env >>= print
-    --runClientM (_genInvoice req) env >>= print
-    runClientM (_listInvoices (L.InvoiceLabel Nothing)) env >>= print
+    runClientM _getInfo env >>= print
+    runClientM (_genInvoice req) env >>= print
+    runClientM (_listInvoices Nothing) env >>= print
 

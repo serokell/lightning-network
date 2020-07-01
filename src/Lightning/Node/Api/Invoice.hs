@@ -4,15 +4,16 @@
 
 -- | Route: @/invoice/@
 module Lightning.Node.Api.Invoice
-  ( InvoiceReq (..)
-  , InvoiceLabel (..)
+  ( InvoiceLabel (..)
   , InvoiceRep (..)
+  , InvoiceReq (..)
   ) where
 
 import Data.Aeson (FromJSON (..), ToJSON (..), genericParseJSON, genericToEncoding, genericToJSON)
 import Data.Time.Clock.POSIX (POSIXTime)
 import Data.Text (Text)
 import GHC.Generics (Generic)
+import Servant.API (ToHttpApiData, toQueryParam)
 
 import Lightning (Bolt11, MilliSatoshi)
 import Lightning.Node.Api.Json (lightningOptions)
@@ -28,7 +29,7 @@ data InvoiceReq = InvoiceReq
   }
   deriving (Generic, Show)
 
-data InvoiceLabel = InvoiceLabel {ilLabel :: Maybe Text} deriving (Generic, Show)
+newtype InvoiceLabel = InvoiceLabel {ilLabel :: Text} deriving (Generic, Show)
 
 instance ToJSON InvoiceReq where
   toJSON = genericToJSON lightningOptions
@@ -43,6 +44,9 @@ instance ToJSON InvoiceLabel where
 
 instance FromJSON InvoiceLabel where
   parseJSON = genericParseJSON lightningOptions
+
+instance ToHttpApiData InvoiceLabel where
+  toQueryParam (InvoiceLabel label) = label
 
 -- | Reply with a created invoice.
 data InvoiceRep = InvoiceRep
