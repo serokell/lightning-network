@@ -51,4 +51,3 @@ main = do
     runClientM _getInfo env >>= print
     runClientM (_genInvoice req) env >>= print
     runClientM (_listInvoices Nothing) env >>= print
-
