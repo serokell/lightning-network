@@ -29,7 +29,9 @@ data InvoiceReq = InvoiceReq
   }
   deriving (Generic, Show)
 
-newtype InvoiceLabel = InvoiceLabel {ilLabel :: Text} deriving (Generic, Show)
+newtype InvoiceLabel = InvoiceLabel
+  { ilLabel :: Text
+  } deriving (Eq, Generic, Ord, Show)
 
 instance ToJSON InvoiceReq where
   toJSON = genericToJSON lightningOptions
