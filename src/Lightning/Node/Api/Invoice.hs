@@ -8,6 +8,7 @@ module Lightning.Node.Api.Invoice
   , InvoiceRep (..)
   , InvoiceReq (..)
   , ListInvoiceRep (..)
+  , ListInvoice (..)
   ) where
 
 import Data.Aeson (FromJSON (..), ToJSON (..), genericParseJSON, genericToEncoding, genericToJSON)
