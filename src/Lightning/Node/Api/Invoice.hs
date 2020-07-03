@@ -7,6 +7,7 @@ module Lightning.Node.Api.Invoice
   ( InvoiceLabel (..)
   , InvoiceRep (..)
   , InvoiceReq (..)
+  , ListInvoiceRep (..)
   ) where
 
 import Data.Aeson (FromJSON (..), ToJSON (..), genericParseJSON, genericToEncoding, genericToJSON)
@@ -15,7 +16,7 @@ import Data.Text (Text)
 import GHC.Generics (Generic)
 import Servant.API (ToHttpApiData, toQueryParam)
 
-import Lightning (Bolt11, MilliSatoshi)
+import Lightning (Bolt11, MilliSatoshi, Status)
 import Lightning.Node.Api.Json (lightningOptions)
 
 
@@ -28,6 +29,11 @@ data InvoiceReq = InvoiceReq
   , irqPrivate :: Maybe Bool
   }
   deriving (Generic, Show)
+
+newtype InvoiceLabel = InvoiceLabel
+  { ilLabel :: Text
+  } deriving (Eq, Generic,  Ord, Show)
+
 
 newtype InvoiceLabel = InvoiceLabel
   { ilLabel :: Text
@@ -64,3 +70,33 @@ instance ToJSON InvoiceRep where
 
 instance FromJSON InvoiceRep where
   parseJSON = genericParseJSON lightningOptions
+
+
+data ListInvoice = ListInvoice
+  { lirLabel :: Text
+  , lirPaymentHash :: Text
+  , lirExpiresAt :: POSIXTime
+  , lirStatus :: Text
+  , lirPaymentPreimage :: Maybe Text
+  } deriving (Generic, Show)
+
+instance ToJSON ListInvoice where
+  toJSON = genericToJSON lightningOptions
+  toEncoding = genericToEncoding lightningOptions
+
+instance FromJSON ListInvoice where
+  parseJSON = genericParseJSON lightningOptions
+
+
+data ListInvoiceRep = ListInvoiceRep
+  { lirInvoices :: [ListInvoice]
+  } deriving (Generic, Show)
+
+instance ToJSON ListInvoiceRep where
+  toJSON = genericToJSON lightningOptions
+  toEncoding = genericToEncoding lightningOptions
+
+instance FromJSON ListInvoiceRep where
+  parseJSON = genericParseJSON lightningOptions
+
+

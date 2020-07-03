@@ -3,15 +3,20 @@
 -- SPDX-License-Identifier: MPL-2.0
 
 module Lightning.Internal.Invoice
-  ( Invoice (..)
-  , Bolt11 (..)
+  ( Bolt11 (..)
+  , Invoice (..)
+  , Status (..)
   , toBolt11
   , fromBolt11
   ) where
 
-import Data.Aeson (FromJSON, ToJSON)
+import Data.Aeson (FromJSON (..), ToJSON (..), defaultOptions, sumEncoding, genericParseJSON, genericToEncoding, genericToJSON)
 import Data.Text (Text)
+import Data.Aeson.TH (deriveJSON)
+import Data.Aeson.Types
 
+
+import GHC.Generics (Generic)
 
 -- | A Lightning network invoice.
 --
@@ -39,3 +44,12 @@ toBolt11 (Invoice bolt11) = bolt11
 -- TODO: Actually implement.
 fromBolt11 :: Bolt11 -> Invoice
 fromBolt11 = Invoice
+
+
+data Status = Unpaid | Paid | Expired
+  deriving (Generic, Show)
+
+deriveJSON (defaultOptions { sumEncoding = UntaggedValue }) ''Status
+
+
+

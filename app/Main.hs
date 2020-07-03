@@ -29,7 +29,7 @@ main = do
       _getInfo :: ClientM L.NodeInfo
       _genInvoice :: L.InvoiceReq -> ClientM L.InvoiceRep
       --_pay :: L.PayReq -> ClientM L.PayRep
-      _listInvoices :: Maybe L.InvoiceLabel -> ClientM [L.InvoiceRep]
+      _listInvoices :: Maybe L.InvoiceLabel -> ClientM L.ListInvoiceRep
 
       api :: Api (AsClientT ClientM)
       api = genericClient
@@ -51,3 +51,4 @@ main = do
     runClientM _getInfo env >>= print
     runClientM (_genInvoice req) env >>= print
     runClientM (_listInvoices Nothing) env >>= print
+    runClientM (_listInvoices (Just (L.InvoiceLabel "lc-5687960")) )env >>= print
