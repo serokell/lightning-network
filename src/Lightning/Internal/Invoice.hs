@@ -12,6 +12,7 @@ module Lightning.Internal.Invoice
 
 import Data.Aeson (FromJSON (..), ToJSON (..), defaultOptions, sumEncoding, genericParseJSON, genericToEncoding, genericToJSON)
 import Data.Text (Text)
+import Data.Char (toLower)
 import Data.Aeson.TH (deriveJSON)
 import Data.Aeson.Types
 
@@ -49,7 +50,7 @@ fromBolt11 = Invoice
 data Status = Unpaid | Paid | Expired
   deriving (Generic, Show)
 
-deriveJSON (defaultOptions { sumEncoding = UntaggedValue }) ''Status
+deriveJSON (defaultOptions { constructorTagModifier = map toLower }) ''Status
 
 
 

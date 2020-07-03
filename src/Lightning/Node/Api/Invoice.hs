@@ -34,11 +34,6 @@ newtype InvoiceLabel = InvoiceLabel
   { ilLabel :: Text
   } deriving (Eq, Generic,  Ord, Show)
 
-
-newtype InvoiceLabel = InvoiceLabel
-  { ilLabel :: Text
-  } deriving (Eq, Generic, Ord, Show)
-
 instance ToJSON InvoiceReq where
   toJSON = genericToJSON lightningOptions
   toEncoding = genericToEncoding lightningOptions
@@ -76,7 +71,7 @@ data ListInvoice = ListInvoice
   { lirLabel :: Text
   , lirPaymentHash :: Text
   , lirExpiresAt :: POSIXTime
-  , lirStatus :: Text
+  , lirStatus :: Status
   , lirPaymentPreimage :: Maybe Text
   } deriving (Generic, Show)
 
