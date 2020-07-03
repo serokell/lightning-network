@@ -47,7 +47,7 @@ fromBolt11 :: Bolt11 -> Invoice
 fromBolt11 = Invoice
 
 
-data Status = Unpaid | Paid Text | Expired
+data Status = Unpaid | Paid | Expired
   deriving (Generic, Show)
 
 deriveJSON (defaultOptions { constructorTagModifier = map toLower }) ''Status
