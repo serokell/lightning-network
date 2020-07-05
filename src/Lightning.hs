@@ -6,8 +6,7 @@ module Lightning
   ( Bolt11
   , Invoice
   , MilliSatoshi
-  , Status
   ) where
 
 import Lightning.Internal.Amount (MilliSatoshi)
-import Lightning.Internal.Invoice (Bolt11, Invoice, Status)
+import Lightning.Internal.Invoice (Bolt11, Invoice)

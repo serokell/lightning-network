@@ -5,7 +5,6 @@
 module Lightning.Internal.Invoice
   ( Bolt11 (..)
   , Invoice (..)
-  , Status (..)
   , toBolt11
   , fromBolt11
   ) where
@@ -45,9 +44,3 @@ toBolt11 (Invoice bolt11) = bolt11
 -- TODO: Actually implement.
 fromBolt11 :: Bolt11 -> Invoice
 fromBolt11 = Invoice
-
-
-data Status = Unpaid | Paid | Expired
-  deriving (Generic, Show)
-
-deriveJSON (defaultOptions { constructorTagModifier = map toLower }) ''Status
