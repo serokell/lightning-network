@@ -3,9 +3,10 @@
 -- SPDX-License-Identifier: MPL-2.0
 
 module Lightning
-  ( Bolt11
+  ( MilliSatoshi
+
+  , Bolt11
   , Invoice
-  , MilliSatoshi
   ) where
 
 import Lightning.Internal.Amount (MilliSatoshi)

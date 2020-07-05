@@ -3,8 +3,9 @@
 -- SPDX-License-Identifier: MPL-2.0
 
 module Lightning.Internal.Invoice
-  ( Bolt11 (..)
-  , Invoice (..)
+  ( Invoice (..)
+
+  , Bolt11 (..)
   , toBolt11
   , fromBolt11
   ) where
