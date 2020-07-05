@@ -19,7 +19,7 @@ import Servant.Auth (Auth)
 
 import Authorization.Macaroon (Macaroon)
 import Lightning.Node.Api.GetInfo as A (Address (..), NodeInfo (..))
-import Lightning.Node.Api.Invoice as A (InvoiceLabel(..), InvoiceRep (..), InvoiceReq (..), ListInvoiceRep (..))
+import Lightning.Node.Api.Invoice as A (InvoiceLabel(..), InvoiceRep (..), InvoiceReq (..), ListInvoicesRep (..))
 import Lightning.Node.Api.Pay as A (PayReq (..), PayRep (..))
 
 
@@ -36,7 +36,7 @@ data ApiV1 route = ApiV1
       :- "invoice"
       :> "listInvoices"
       :> QueryParam "label" InvoiceLabel
-      :> Get '[JSON] ListInvoiceRep
+      :> Get '[JSON] ListInvoicesRep
   , _pay :: route
       :- "pay"
       :> ReqBody '[JSON] PayReq

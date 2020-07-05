@@ -7,8 +7,8 @@ module Lightning.Node.Api.Invoice
   ( InvoiceLabel (..)
   , InvoiceRep (..)
   , InvoiceReq (..)
-  , ListInvoiceRep (..)
-  , ListInvoice (..)
+  , ListInvoicesElem (..)
+  , ListInvoicesRep (..)
   ) where
 
 import Data.Aeson (FromJSON (..), ToJSON (..), genericParseJSON, genericToEncoding, genericToJSON)
@@ -68,29 +68,31 @@ instance FromJSON InvoiceRep where
   parseJSON = genericParseJSON lightningOptions
 
 
-data ListInvoice = ListInvoice
-  { lirLabel :: Text
-  , lirPaymentHash :: Text
-  , lirExpiresAt :: POSIXTime
-  , lirStatus :: Status
-  , lirPaymentPreimage :: Maybe Text
+-- | Element with information about one invoice.
+data ListInvoicesElem = ListInvoicesElem
+  { lieLabel :: Text
+  , liePaymentHash :: Text
+  , lieExpiresAt :: POSIXTime
+  , lieStatus :: Status
+  , liePaymentPreimage :: Maybe Text
   } deriving (Generic, Show)
 
-instance ToJSON ListInvoice where
+instance ToJSON ListInvoicesElem where
   toJSON = genericToJSON lightningOptions
   toEncoding = genericToEncoding lightningOptions
 
-instance FromJSON ListInvoice where
+instance FromJSON ListInvoicesElem where
   parseJSON = genericParseJSON lightningOptions
 
 
-data ListInvoiceRep = ListInvoiceRep
-  { lirInvoices :: [ListInvoice]
+-- | Wrapper to match the layout of the returned data.
+newtype ListInvoicesRep = ListInvoicesRep
+  { lirInvoices :: [ListInvoicesElem]
   } deriving (Generic, Show)
 
-instance ToJSON ListInvoiceRep where
+instance ToJSON ListInvoicesRep where
   toJSON = genericToJSON lightningOptions
   toEncoding = genericToEncoding lightningOptions
 
-instance FromJSON ListInvoiceRep where
+instance FromJSON ListInvoicesRep where
   parseJSON = genericParseJSON lightningOptions
