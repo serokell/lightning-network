@@ -60,12 +60,13 @@ _TODO: Come up with a better way._
 ```haskell
 _getInfo :: ClientM L.NodeInfo
 _genInvoice :: L.InvoiceReq -> ClientM L.InvoiceRep
-_listInvoices :: Maybe L.InvoiceLabel -> ClientM L.InvoiceRep
+_listInvoices :: Maybe L.InvoiceLabel -> ClientM L.ListInvoicesRep
 _pay :: L.PayReq -> ClientM L.PayRep
 
 ApiV1
   { _getInfo
   , _genInvoice
+  , _listInvoices
   , _pay
   } = fromServant @_ @(AsClientT ClientM) (_v1 api macaroon)
 ```
@@ -95,6 +96,7 @@ api = client (Proxy :: Proxy (ToServantApi Api))
 
 _getInfo :: ClientM L.NodeInfo
 _genInvoice :: L.InvoiceReq -> ClientM L.InvoiceRep
+_listInvoices :: Maybe L.InvoiceLabel -> ClientM L.ListInvoicesRep
 _pay :: L.PayReq -> ClientM L.PayRep
 
 _getInfo :<|> _genInvoice :<|> _pay = api macaroon

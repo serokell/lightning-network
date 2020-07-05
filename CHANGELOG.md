@@ -6,6 +6,13 @@ SPDX-License-Identifier: MPL-2.0
 
 # Changelog
 
+## Unreleased
+
+### Added
+
+- c-lightning REST API v1:
+  - `/invoice/listInvoices`
+
 ## 0.0.0.1
 
 ### Added

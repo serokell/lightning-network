@@ -28,8 +28,8 @@ main = do
     let
       _getInfo :: ClientM L.NodeInfo
       _genInvoice :: L.InvoiceReq -> ClientM L.InvoiceRep
-      --_pay :: L.PayReq -> ClientM L.PayRep
       _listInvoices :: Maybe L.InvoiceLabel -> ClientM L.ListInvoicesRep
+      --_pay :: L.PayReq -> ClientM L.PayRep
 
       api :: Api (AsClientT ClientM)
       api = genericClient
