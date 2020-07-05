@@ -48,7 +48,10 @@ main = do
     manager <- newManager defaultManagerSettings
     let env = mkClientEnv manager (BaseUrl Http "localhost" 3001 "")
 
+    putStrLn "*** Info ***"
     runClientM _getInfo env >>= print
-    runClientM (_genInvoice req) env >>= print
-    runClientM (_listInvoices Nothing) env >>= print
-    runClientM (_listInvoices (Just (L.InvoiceLabel "lc-5687960")) )env >>= print
+    putStrLn "*** Generating an invoice ***"
+    invoice <- runClientM (_genInvoice req) env
+    putStrLn $ "Invoice: " <> show invoice
+    putStrLn "*** Listing the invoice ***"
+    runClientM (_listInvoices (Just $ L.InvoiceLabel payId)) env >>= print
