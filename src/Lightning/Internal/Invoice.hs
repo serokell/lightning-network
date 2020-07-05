@@ -51,5 +51,3 @@ data Status = Unpaid | Paid | Expired
   deriving (Generic, Show)
 
 deriveJSON (defaultOptions { constructorTagModifier = map toLower }) ''Status
-
-

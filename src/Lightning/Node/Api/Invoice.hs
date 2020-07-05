@@ -94,5 +94,3 @@ instance ToJSON ListInvoiceRep where
 
 instance FromJSON ListInvoiceRep where
   parseJSON = genericParseJSON lightningOptions
-
-

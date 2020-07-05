@@ -60,6 +60,7 @@ _TODO: Come up with a better way._
 ```haskell
 _getInfo :: ClientM L.NodeInfo
 _genInvoice :: L.InvoiceReq -> ClientM L.InvoiceRep
+_listInvoices :: Maybe L.InvoiceLabel -> ClientM L.InvoiceRep
 _pay :: L.PayReq -> ClientM L.PayRep
 
 ApiV1
