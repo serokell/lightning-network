@@ -4,14 +4,20 @@
 
 module Lightning.Internal.Invoice
   ( Invoice (..)
+
   , Bolt11 (..)
   , toBolt11
   , fromBolt11
   ) where
 
-import Data.Aeson (FromJSON, ToJSON)
+import Data.Aeson (FromJSON (..), ToJSON (..), defaultOptions, sumEncoding, genericParseJSON, genericToEncoding, genericToJSON)
 import Data.Text (Text)
+import Data.Char (toLower)
+import Data.Aeson.TH (deriveJSON)
+import Data.Aeson.Types
 
+
+import GHC.Generics (Generic)
 
 -- | A Lightning network invoice.
 --

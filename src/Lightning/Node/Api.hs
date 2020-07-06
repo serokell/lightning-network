@@ -13,13 +13,13 @@ module Lightning.Node.Api
   ) where
 
 import GHC.Generics (Generic)
-import Servant.API ((:>), Get, JSON, Post, ReqBody)
+import Servant.API ((:>), Get, JSON, Post, QueryParam, ReqBody)
 import Servant.API.Generic (ToServantApi, (:-))
 import Servant.Auth (Auth)
 
 import Authorization.Macaroon (Macaroon)
 import Lightning.Node.Api.GetInfo as A (Address (..), NodeInfo (..))
-import Lightning.Node.Api.Invoice as A (InvoiceReq (..), InvoiceRep (..))
+import Lightning.Node.Api.Invoice as A (InvoiceLabel(..), InvoiceRep (..), InvoiceReq (..), ListInvoicesRep (..))
 import Lightning.Node.Api.Pay as A (PayReq (..), PayRep (..))
 
 
@@ -32,6 +32,11 @@ data ApiV1 route = ApiV1
       :> "genInvoice"
       :> ReqBody '[JSON] InvoiceReq
       :> Post '[JSON] InvoiceRep
+  , _listInvoices ::route
+      :- "invoice"
+      :> "listInvoices"
+      :> QueryParam "label" InvoiceLabel
+      :> Get '[JSON] ListInvoicesRep
   , _pay :: route
       :- "pay"
       :> ReqBody '[JSON] PayReq

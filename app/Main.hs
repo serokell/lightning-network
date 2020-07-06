@@ -28,14 +28,15 @@ main = do
     let
       _getInfo :: ClientM L.NodeInfo
       _genInvoice :: L.InvoiceReq -> ClientM L.InvoiceRep
+      _listInvoices :: Maybe L.InvoiceLabel -> ClientM L.ListInvoicesRep
       --_pay :: L.PayReq -> ClientM L.PayRep
 
       api :: Api (AsClientT ClientM)
       api = genericClient
-
       ApiV1
         { _getInfo
         , _genInvoice
+        , _listInvoices
         --, _pay
         } = fromServant @_ @(AsClientT ClientM) (_v1 api macaroon)
 
@@ -47,5 +48,10 @@ main = do
     manager <- newManager defaultManagerSettings
     let env = mkClientEnv manager (BaseUrl Http "localhost" 3001 "")
 
+    putStrLn "*** Info ***"
     runClientM _getInfo env >>= print
-    runClientM (_genInvoice req) env >>= print
+    putStrLn "*** Generating an invoice ***"
+    invoice <- runClientM (_genInvoice req) env
+    putStrLn $ "Invoice: " <> show invoice
+    putStrLn "*** Listing the invoice ***"
+    runClientM (_listInvoices (Just $ L.InvoiceLabel payId)) env >>= print

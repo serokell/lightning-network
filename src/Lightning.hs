@@ -5,8 +5,8 @@
 module Lightning
   ( MilliSatoshi
 
-  , Invoice
   , Bolt11
+  , Invoice
   ) where
 
 import Lightning.Internal.Amount (MilliSatoshi)
