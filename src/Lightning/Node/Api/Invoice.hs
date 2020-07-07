@@ -15,6 +15,7 @@ module Lightning.Node.Api.Invoice
 
 import Data.Aeson (FromJSON (..), ToJSON (..), genericParseJSON, genericToEncoding, genericToJSON)
 import Data.Aeson.Types ((.:), Value (Object), withObject)
+import Data.String (IsString)
 import Data.Time.Clock.POSIX (POSIXTime)
 import Data.Text (Text)
 import GHC.Generics (Generic)
@@ -27,7 +28,7 @@ import Lightning.Node.Api.Json (lightningOptions)
 -- | Request to create an invoice.
 data InvoiceReq = InvoiceReq
   { irqAmount :: MilliSatoshi
-  , irqLabel :: Text
+  , irqLabel :: InvoiceLabel
   , irqDescription :: Text
   , irqExpire :: Maybe Int  -- ^ Expire after (seconds).
   , irqPrivate :: Maybe Bool
@@ -36,7 +37,7 @@ data InvoiceReq = InvoiceReq
 
 newtype InvoiceLabel = InvoiceLabel
   { ilLabel :: Text
-  } deriving (Eq, Generic,  Ord, Show)
+  } deriving (Eq, Generic, IsString, Monoid, Ord, Semigroup, Show)
 
 instance ToJSON InvoiceReq where
   toJSON = genericToJSON lightningOptions

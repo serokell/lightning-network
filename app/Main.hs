@@ -43,7 +43,7 @@ main = do
     randomSeq <- randomRIO (1, 99999999999) :: IO Int
     let
       payId = "ct-" <> T.pack (show randomSeq)
-      req = L.InvoiceReq 100 payId "client test" Nothing Nothing
+      req = L.InvoiceReq 100 (L.InvoiceLabel payId) "client test" Nothing Nothing
 
     manager <- newManager defaultManagerSettings
     let env = mkClientEnv manager (BaseUrl Http "localhost" 3001 "")
