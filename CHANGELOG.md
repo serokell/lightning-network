@@ -13,6 +13,10 @@ SPDX-License-Identifier: MPL-2.0
 - c-lightning REST API v1:
   - `/invoice/listInvoices`
 
+### Changed
+
+- `InvoiceReq` now contains `InvoiceLabel` instead of `Text`
+
 ## 0.0.0.1
 
 ### Added
