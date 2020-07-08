@@ -4,10 +4,11 @@
 
 module Lightning
   ( MilliSatoshi
+  , Satoshi
 
   , Bolt11
   , Invoice
   ) where
 
-import Lightning.Internal.Amount (MilliSatoshi)
+import Lightning.Internal.Amount (MilliSatoshi, Satoshi)
 import Lightning.Internal.Invoice (Bolt11, Invoice)
