@@ -23,6 +23,7 @@ data PayReq = PayReq
   -- TODO: Optional amount for "any" invoices.
   , prqMaxfeepercent :: Maybe Double
   , prqExemptfee :: Maybe MilliSatoshi
+  , prqId :: Text
   }
   deriving (Generic, Show)
 
