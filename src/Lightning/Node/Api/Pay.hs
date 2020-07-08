@@ -21,6 +21,7 @@ import Lightning.Node.Api.Json (lightningOptions)
 data PayReq = PayReq
   { prqInvoice :: Bolt11
   -- TODO: Optional amount for "any" invoices.
+  , prqlabel :: Text
   , prqMaxfeepercent :: Maybe Double
   , prqExemptfee :: Maybe MilliSatoshi
   }
