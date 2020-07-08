@@ -14,6 +14,7 @@ import Data.Text (Text)
 import GHC.Generics (Generic)
 
 import Lightning (Bolt11, MilliSatoshi)
+import Lightning.Node.Api.Invoice (InvoiceLabel)
 import Lightning.Node.Api.Json (lightningOptions)
 
 
@@ -21,7 +22,7 @@ import Lightning.Node.Api.Json (lightningOptions)
 data PayReq = PayReq
   { prqInvoice :: Bolt11
   -- TODO: Optional amount for "any" invoices.
-  , prqlabel :: Text
+  , prqLabel :: InvoiceLabel
   , prqMaxfeepercent :: Maybe Double
   , prqExemptfee :: Maybe MilliSatoshi
   }
