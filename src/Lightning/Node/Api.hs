@@ -21,6 +21,7 @@ import Authorization.Macaroon (Macaroon)
 import Lightning.Node.Api.GetInfo as A (Address (..), NodeInfo (..))
 import Lightning.Node.Api.Invoice as A (InvoiceLabel(..), InvoiceRep (..), InvoiceReq (..), ListInvoicesRep (..))
 import Lightning.Node.Api.Pay as A (PayReq (..), PayRep (..))
+import Lightning.Node.Api.Channel as A (ListChannelsElem (..))
 
 
 data ApiV1 route = ApiV1
@@ -32,11 +33,15 @@ data ApiV1 route = ApiV1
       :> "genInvoice"
       :> ReqBody '[JSON] InvoiceReq
       :> Post '[JSON] InvoiceRep
-  , _listInvoices ::route
+  , _listInvoices :: route
       :- "invoice"
       :> "listInvoices"
       :> QueryParam "label" InvoiceLabel
       :> Get '[JSON] ListInvoicesRep
+  , _listChannels :: route
+      :- "channel"
+      :> "listChannels"
+      :> Get '[JSON] [ListChannelsElem]
   , _pay :: route
       :- "pay"
       :> ReqBody '[JSON] PayReq

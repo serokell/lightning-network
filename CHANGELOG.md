@@ -12,6 +12,7 @@ SPDX-License-Identifier: MPL-2.0
 
 - c-lightning REST API v1:
   - `/invoice/listInvoices`
+  - `/channel/listChannels`
 
 ### Changed
 

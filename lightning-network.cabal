@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 53084aa3620651ec75010f4ee6722feb9233d9f319b51c64bb2c5ab5f46dee1d
+-- hash: 4521c67555019ffda7da611eac48e24c7a250628343d3abafda72bb26aa1f15b
 
 name:           lightning-network
 version:        0.0.0.1
@@ -35,6 +35,7 @@ library
       Lightning.Internal.Amount
       Lightning.Internal.Invoice
       Lightning.Node.Api
+      Lightning.Node.Api.Channel
       Lightning.Node.Api.GetInfo
       Lightning.Node.Api.Invoice
       Lightning.Node.Api.Json

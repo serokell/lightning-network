@@ -29,6 +29,7 @@ main = do
       _getInfo :: ClientM L.NodeInfo
       _genInvoice :: L.InvoiceReq -> ClientM L.InvoiceRep
       _listInvoices :: Maybe L.InvoiceLabel -> ClientM L.ListInvoicesRep
+      _listChannels :: ClientM [L.ListChannelsElem]
       --_pay :: L.PayReq -> ClientM L.PayRep
 
       api :: Api (AsClientT ClientM)
@@ -37,6 +38,7 @@ main = do
         { _getInfo
         , _genInvoice
         , _listInvoices
+        , _listChannels
         --, _pay
         } = fromServant @_ @(AsClientT ClientM) (_v1 api macaroon)
 
@@ -55,3 +57,5 @@ main = do
     putStrLn $ "Invoice: " <> show invoice
     putStrLn "*** Listing the invoice ***"
     runClientM (_listInvoices (Just $ L.InvoiceLabel payId)) env >>= print
+    putStrLn "*** Listing channels ***"
+    runClientM _listChannels env >>= print
