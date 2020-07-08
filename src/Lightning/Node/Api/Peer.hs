@@ -1,5 +1,5 @@
 module Lightning.Node.Api.Peer
-  ( ListPeersRep (..)
+  ( ListChannelsElem (..)
   ) where
 
 
@@ -9,17 +9,16 @@ import GHC.Generics (Generic)
 
 import Lightning.Node.Api.Json (lightningOptions)
 
-
-data ListPeersRep = ListPeersRep
+data ListChannelsElem = ListChannelsElem
   { lprId :: Text
   , lprConnected :: Bool
   , lprMsatoshiToUs :: Int
   , lprMsatoshiTotal :: Int
   } deriving (Generic, Show)
 
-instance ToJSON ListPeersRep where
+instance ToJSON ListChannelsElem where
   toJSON = genericToJSON lightningOptions
   toEncoding = genericToEncoding lightningOptions
 
-instance FromJSON ListPeersRep where
+instance FromJSON ListChannelsElem where
   parseJSON = genericParseJSON lightningOptions

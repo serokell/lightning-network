@@ -21,7 +21,7 @@ import Authorization.Macaroon (Macaroon)
 import Lightning.Node.Api.GetInfo as A (Address (..), NodeInfo (..))
 import Lightning.Node.Api.Invoice as A (InvoiceLabel(..), InvoiceRep (..), InvoiceReq (..), ListInvoicesRep (..))
 import Lightning.Node.Api.Pay as A (PayReq (..), PayRep (..))
-import Lightning.Node.Api.Peer as A (ListPeersRep (..))
+import Lightning.Node.Api.Peer as A (ListChannelsElem (..))
 
 
 data ApiV1 route = ApiV1
@@ -38,10 +38,10 @@ data ApiV1 route = ApiV1
       :> "listInvoices"
       :> QueryParam "label" InvoiceLabel
       :> Get '[JSON] ListInvoicesRep
-  , _listPeers :: route
+  , _listChannels :: route
       :- "channel"
       :> "listChannels"
-      :> Get '[JSON] [ListPeersRep]
+      :> Get '[JSON] [ListChannelsElem]
   , _pay :: route
       :- "pay"
       :> ReqBody '[JSON] PayReq
