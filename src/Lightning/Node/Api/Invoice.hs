@@ -37,7 +37,9 @@ data InvoiceReq = InvoiceReq
 
 newtype InvoiceLabel = InvoiceLabel
   { ilLabel :: Text
-  } deriving (Eq, Generic, IsString, Monoid, Ord, Semigroup, Show)
+  } deriving
+    ( Eq, Generic, IsString, Monoid, Ord, Semigroup, Show
+    , FromJSON, ToJSON, ToHttpApiData)
 
 instance ToJSON InvoiceReq where
   toJSON = genericToJSON lightningOptions
@@ -46,15 +48,6 @@ instance ToJSON InvoiceReq where
 instance FromJSON InvoiceReq where
   parseJSON = genericParseJSON lightningOptions
 
-instance ToJSON InvoiceLabel where
-  toJSON = genericToJSON lightningOptions
-  toEncoding = genericToEncoding lightningOptions
-
-instance FromJSON InvoiceLabel where
-  parseJSON = genericParseJSON lightningOptions
-
-instance ToHttpApiData InvoiceLabel where
-  toQueryParam (InvoiceLabel label) = label
 
 -- | Reply with a created invoice.
 data InvoiceRep = InvoiceRep
