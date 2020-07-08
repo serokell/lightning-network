@@ -7,13 +7,14 @@ import Data.Aeson (FromJSON (..), ToJSON (..), genericParseJSON, genericToEncodi
 import Data.Text
 import GHC.Generics (Generic)
 
+import Lightning (MilliSatoshi)
 import Lightning.Node.Api.Json (lightningOptions)
 
 data ListChannelsElem = ListChannelsElem
-  { lprId :: Text
-  , lprConnected :: Bool
-  , lprMsatoshiToUs :: Int
-  , lprMsatoshiTotal :: Int
+  { lceId :: Text
+  , lceConnected :: Bool
+  , lceMsatoshiToUs :: MilliSatoshi
+  , lceMsatoshiTotal :: MilliSatoshi
   } deriving (Generic, Show)
 
 instance ToJSON ListChannelsElem where
