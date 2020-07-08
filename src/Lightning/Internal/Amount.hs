@@ -5,6 +5,7 @@
 module Lightning.Internal.Amount
   ( MilliSatoshi (..)
   , Satoshi (..)
+  , toMilliSatoshi
   ) where
 
 import Data.Aeson (FromJSON, ToJSON)
