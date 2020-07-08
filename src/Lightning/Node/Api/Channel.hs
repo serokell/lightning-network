@@ -1,4 +1,4 @@
-module Lightning.Node.Api.Peer
+module Lightning.Node.Api.Channel
   ( ListChannelsElem (..)
   ) where
 
