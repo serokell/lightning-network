@@ -16,7 +16,7 @@ data ListChannelsElem = ListChannelsElem
   , lceMsatoshiToUs :: MilliSatoshi
   , lceMsatoshiTotal :: MilliSatoshi
   , lseTheirChannelReserveSatoshis :: Satoshi
-  , lseOurChannelReserveSatoshis :: Satoshi
+  , lceOurChannelReserveSatoshis :: Satoshi
   } deriving (Generic, Show)
 
 instance ToJSON ListChannelsElem where
