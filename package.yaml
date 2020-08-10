@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 name: lightning-network
-version: 0.0.0.1
+version: 0.0.0.2
 synopsis: A Haskell interface for the Lightning Network
 description: |
   Tools for working with payments on the Lightning Netowrk and interacting

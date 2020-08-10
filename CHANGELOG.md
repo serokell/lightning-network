@@ -8,6 +8,8 @@ SPDX-License-Identifier: MPL-2.0
 
 ## Unreleased
 
+## 0.0.0.2
+
 ### Added
 
 - c-lightning REST API v1:

@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4521c67555019ffda7da611eac48e24c7a250628343d3abafda72bb26aa1f15b
+-- hash: 5a60ff226173c0bc2d5db3c98fc4a0b87e8c9ef0b34764c8c2882130dabac4d8
 
 name:           lightning-network
-version:        0.0.0.1
+version:        0.0.0.2
 synopsis:       A Haskell interface for the Lightning Network
 description:    Tools for working with payments on the Lightning Netowrk and interacting
                 with a Lightning Network node through its REST API.
