@@ -15,7 +15,7 @@ import Data.Text (Text)
 import Data.Char (toLower)
 import Data.Aeson.TH (deriveJSON)
 import Data.Aeson.Types
-
+import Web.HttpApiData (ToHttpApiData)
 
 import GHC.Generics (Generic)
 
@@ -32,7 +32,7 @@ newtype Invoice = Invoice Bolt11
 --
 -- TODO: Provide FromJSON instance that checks the format.
 newtype Bolt11 = Bolt11 Text
-  deriving (FromJSON, Show, ToJSON)
+  deriving (FromJSON, Show, ToJSON, ToHttpApiData)
 
 -- | Encode an 'Invoice' as bolt11.
 --

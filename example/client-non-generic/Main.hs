@@ -12,6 +12,7 @@ import Servant.Client (Client, ClientM, client)
 import Lightning.Node.Api (Api)
 
 import Authorization.Macaroon (Macaroon)
+import Lightning.Internal.Invoice (Bolt11)
 import qualified Lightning.Node.Api as L
 
 
@@ -29,9 +30,12 @@ api = client (Proxy :: Proxy (ToServantApi Api))
 
 _getInfo :: ClientM L.NodeInfo
 _genInvoice :: L.InvoiceReq -> ClientM L.InvoiceRep
+_listInvoices :: Maybe L.InvoiceLabel -> ClientM L.ListInvoicesRep
+_listChannels :: ClientM [L.ListChannelsElem]
 _pay :: L.PayReq -> ClientM L.PayRep
+_decodePay :: Bolt11 -> ClientM L.DecodePayRep
 
-_getInfo :<|> _genInvoice :<|> _pay = api macaroon
+_getInfo :<|> _genInvoice :<|> _listInvoices :<|> _listChannels :<|> _pay :<|> _decodePay = api macaroon
 
 
 main :: IO ()
