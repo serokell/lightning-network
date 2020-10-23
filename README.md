@@ -65,6 +65,7 @@ _listInvoices :: Maybe L.InvoiceLabel -> ClientM L.ListInvoicesRep
 _listChannels :: ClientM [L.ListChannelsElem]
 _pay :: L.PayReq -> ClientM L.PayRep
 _decodePay :: Bolt11 -> ClientM L.DecodePayRep
+_listPayments :: Maybe Bolt11 -> ClientM L.ListPaymentsRep
 
 ApiV1
   { _getInfo
@@ -73,6 +74,7 @@ ApiV1
   , _listChannels
   , _pay
   , _decodePay
+  , _listPayments
   } = fromServant @_ @(AsClientT ClientM) (_v1 api macaroon)
 ```
 
@@ -105,8 +107,9 @@ _listInvoices :: Maybe L.InvoiceLabel -> ClientM L.ListInvoicesRep
 _listChannels :: ClientM [L.ListChannelsElem]
 _pay :: L.PayReq -> ClientM L.PayRep
 _decodePay :: Bolt11 -> ClientM L.DecodePayRep
+_listPayments :: Maybe Bolt11 -> ClientM L.ListPaymentsRep
 
-_getInfo :<|> _genInvoice :<|> _listInvoices :<|> _listChannels :<|> _pay :<|> _decodePay = api macaroon
+_getInfo :<|> _genInvoice :<|> _listInvoices :<|> _listChannels :<|> _pay :<|> _decodePay :<|> _listPayments = api macaroon
 ```
 
 
