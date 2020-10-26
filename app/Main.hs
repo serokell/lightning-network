@@ -16,6 +16,7 @@ import qualified Data.Text as T
 import Lightning.Node.Api (Api (_v1), ApiV1 (..))
 
 import qualified Authorization.Macaroon as Mac
+import Lightning.Internal.Invoice (Bolt11)
 import qualified Lightning.Node.Api as L
 
 
@@ -31,6 +32,7 @@ main = do
       _listInvoices :: Maybe L.InvoiceLabel -> ClientM L.ListInvoicesRep
       _listChannels :: ClientM [L.ListChannelsElem]
       --_pay :: L.PayReq -> ClientM L.PayRep
+      _decodePay :: Bolt11 -> ClientM L.DecodePayRep
 
       api :: Api (AsClientT ClientM)
       api = genericClient
@@ -40,6 +42,7 @@ main = do
         , _listInvoices
         , _listChannels
         --, _pay
+        , _decodePay
         } = fromServant @_ @(AsClientT ClientM) (_v1 api macaroon)
 
     randomSeq <- randomRIO (1, 99999999999) :: IO Int
@@ -59,3 +62,8 @@ main = do
     runClientM (_listInvoices (Just $ L.InvoiceLabel payId)) env >>= print
     putStrLn "*** Listing channels ***"
     runClientM _listChannels env >>= print
+    case invoice of
+      Left _ -> pure ()
+      Right invoiceRes -> do
+        putStrLn "*** Decoding an invoice ***"
+        runClientM (_decodePay $ L.irpBolt11 invoiceRes) env >>= print

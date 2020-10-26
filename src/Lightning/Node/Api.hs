@@ -13,14 +13,16 @@ module Lightning.Node.Api
   ) where
 
 import GHC.Generics (Generic)
-import Servant.API ((:>), Get, JSON, Post, QueryParam, ReqBody)
+import Servant.API ((:>), Capture, Get, JSON, Post, QueryParam, ReqBody)
 import Servant.API.Generic (ToServantApi, (:-))
 import Servant.Auth (Auth)
 
 import Authorization.Macaroon (Macaroon)
+import Lightning.Internal.Invoice (Bolt11)
 import Lightning.Node.Api.GetInfo as A (Address (..), NodeInfo (..))
 import Lightning.Node.Api.Invoice as A (InvoiceLabel(..), InvoiceRep (..), InvoiceReq (..), ListInvoicesRep (..))
 import Lightning.Node.Api.Pay as A (PayReq (..), PayRep (..))
+import Lightning.Node.Api.Pay.Decode as A (DecodePayRep (..), Route (..))
 import Lightning.Node.Api.Channel as A (ListChannelsElem (..))
 
 
@@ -46,6 +48,11 @@ data ApiV1 route = ApiV1
       :- "pay"
       :> ReqBody '[JSON] PayReq
       :> Post '[JSON] PayRep
+  , _decodePay :: route
+      :- "pay"
+      :> "decodePay"
+      :> Capture "invoice" Bolt11
+      :> Get '[JSON] DecodePayRep
   }
   deriving (Generic)
 

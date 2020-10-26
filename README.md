@@ -41,6 +41,7 @@ import Servant.API.Generic (fromServant)
 import Servant.Client (Client, ClientM)
 import Servant.Client.Generic (AsClientT, genericClient)
 
+import Lightning.Internal.Invoice (Bolt11)
 import Lightning.Node.Api (Api (_v1), ApiV1 (..))
 
 import qualified Lightning.Node.Api as L
@@ -63,6 +64,7 @@ _genInvoice :: L.InvoiceReq -> ClientM L.InvoiceRep
 _listInvoices :: Maybe L.InvoiceLabel -> ClientM L.ListInvoicesRep
 _listChannels :: ClientM [L.ListChannelsElem]
 _pay :: L.PayReq -> ClientM L.PayRep
+_decodePay :: Bolt11 -> ClientM L.DecodePayRep
 
 ApiV1
   { _getInfo
@@ -70,6 +72,7 @@ ApiV1
   , _listInvoices
   , _listChannels
   , _pay
+  , _decodePay
   } = fromServant @_ @(AsClientT ClientM) (_v1 api macaroon)
 ```
 
@@ -101,8 +104,9 @@ _genInvoice :: L.InvoiceReq -> ClientM L.InvoiceRep
 _listInvoices :: Maybe L.InvoiceLabel -> ClientM L.ListInvoicesRep
 _listChannels :: ClientM [L.ListChannelsElem]
 _pay :: L.PayReq -> ClientM L.PayRep
+_decodePay :: Bolt11 -> ClientM L.DecodePayRep
 
-_getInfo :<|> _genInvoice :<|> _listInvoices :<|> _listChannels :<|> _pay = api macaroon
+_getInfo :<|> _genInvoice :<|> _listInvoices :<|> _listChannels :<|> _pay :<|> _decodePay = api macaroon
 ```
 
 
