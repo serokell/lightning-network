@@ -41,6 +41,7 @@ library
       Lightning.Node.Api.Json
       Lightning.Node.Api.Pay
       Lightning.Node.Api.Pay.Decode
+      Lightning.Node.Api.Pay.List
   other-modules:
       Paths_lightning_network
   hs-source-dirs:

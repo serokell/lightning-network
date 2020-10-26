@@ -23,6 +23,7 @@ import Lightning.Node.Api.GetInfo as A (Address (..), NodeInfo (..))
 import Lightning.Node.Api.Invoice as A (InvoiceLabel(..), InvoiceRep (..), InvoiceReq (..), ListInvoicesRep (..))
 import Lightning.Node.Api.Pay as A (PayReq (..), PayRep (..))
 import Lightning.Node.Api.Pay.Decode as A (DecodePayRep (..), Route (..))
+import Lightning.Node.Api.Pay.List as A (ListPaymentsRep (..))
 import Lightning.Node.Api.Channel as A (ListChannelsElem (..))
 
 
@@ -53,6 +54,11 @@ data ApiV1 route = ApiV1
       :> "decodePay"
       :> Capture "invoice" Bolt11
       :> Get '[JSON] DecodePayRep
+  , _listPayments :: route
+      :- "pay"
+      :> "listPayments"
+      :> QueryParam "invoice" Bolt11
+      :> Get '[JSON] ListPaymentsRep
   }
   deriving (Generic)
 

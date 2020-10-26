@@ -33,6 +33,7 @@ main = do
       _listChannels :: ClientM [L.ListChannelsElem]
       --_pay :: L.PayReq -> ClientM L.PayRep
       _decodePay :: Bolt11 -> ClientM L.DecodePayRep
+      _listPayments :: Maybe Bolt11 -> ClientM L.ListPaymentsRep
 
       api :: Api (AsClientT ClientM)
       api = genericClient
@@ -43,6 +44,7 @@ main = do
         , _listChannels
         --, _pay
         , _decodePay
+        , _listPayments
         } = fromServant @_ @(AsClientT ClientM) (_v1 api macaroon)
 
     randomSeq <- randomRIO (1, 99999999999) :: IO Int
@@ -67,3 +69,5 @@ main = do
       Right invoiceRes -> do
         putStrLn "*** Decoding an invoice ***"
         runClientM (_decodePay $ L.irpBolt11 invoiceRes) env >>= print
+    putStrLn "*** Listing payments ***"
+    runClientM (_listPayments Nothing) env >>= print
